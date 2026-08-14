@@ -1,0 +1,49 @@
+spring:
+  profiles:
+    active: local
+
+  application:
+    name: utms
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/utms}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: utms
+        format_sql: true
+
+  flyway:
+    enabled: true
+    default-schema: utms
+    schemas: utms
+    locations: classpath:db/migration
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${SERVER_PORT:8080}
+
+utms:
+  pagination:
+    default-size: 20
+    max-size: 100
+
+logging:
+  level:
+    com.utms: INFO
+    org.springframework.security: WARN
+    org.springframework.boot.autoconfigure.security: WARN

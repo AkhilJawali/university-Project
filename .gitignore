@@ -1,0 +1,23 @@
+# Build output
+**/target/
+**/build/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Env
+.env
+.env.local
+
+# Kiro secrets (MCP tokens)
+.kiro/settings/mcp.json
