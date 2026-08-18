@@ -53,6 +53,7 @@ The 4 default subtasks are created when the story is created. Development subtas
 - Epics are broken into **testable User Stories**, each ≤ 8 story points.
 - Each User Story gets the 4 default subtasks immediately on creation.
 - Work starts only when the story is assigned.
+- **Story Description Rule:** Every User Story description must comprehensively cover all aspects of that story's scope. It must also explicitly reference the BRD point number(s) (e.g., "BRD Section 6.3", "Requirement 9.1, 9.2") that the story addresses. No story should exist without clear traceability back to the BRD.
 
 ### 2. Requirement Generation (Default Subtask 1)
 
@@ -257,3 +258,8 @@ Kiro must:
     - **Before merging:** Ask the team member for explicit permission: "Story {KEY} is complete. All subtasks done, review approved, tests passed. Ready to merge to main?"
     - **Only merge after confirmation.** Never push or merge to `main` without explicit user approval.
     - **Delete the feature branch** after successful merge to main.
+16. **Story description completeness (mandatory).** When creating a User Story in Jira:
+    - The description must cover **all parts** of what the story delivers (scope, acceptance criteria, key behaviors).
+    - The description must explicitly list the **BRD point number(s)** the story is derived from (e.g., "BRD Requirements: 9.1, 9.2, 9.3").
+    - If a story spans multiple BRD sections, all relevant section/point numbers must be referenced.
+    - Kiro must refuse to create a story without BRD traceability in the description.
