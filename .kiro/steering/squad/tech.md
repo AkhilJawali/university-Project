@@ -8,12 +8,22 @@ inclusion: always
 - **Language (Backend):** Java 17+
 - **Framework:** Spring Boot 3.x (Spring Web, Spring Data JPA, Spring Security)
 - **Database:** PostgreSQL 15+
-- **Frontend:** React 18+
+- **Frontend:** React 18+ (use plane JSX, No Typescript)
 - **Build (Backend):** Maven (single-module, expandable to multi-module)
 - **Build (Frontend):** pnpm
 - **API Style:** RESTful (OpenAPI 3.0 spec-first)
 - **Authentication:** Spring Security with JWT (stateless sessions)
 - **Migration:** Flyway (versioned SQL migrations)
+
+## Frontend Language Rule
+
+**The frontend uses plain JavaScript (JSX) — NOT TypeScript.**
+
+- All frontend files use `.jsx` and `.js` extensions, never `.tsx` or `.ts`
+- Use PropTypes for prop validation instead of TypeScript interfaces
+- Use JSDoc comments for documentation where needed
+- Zod schemas provide runtime validation (replacing compile-time type checks)
+- This is a hard rule — no TypeScript in the frontend codebase
 
 ## Architecture Pattern
 - **Modular Monolith** (Phase 1) — single deployable Spring Boot application with clear module boundaries

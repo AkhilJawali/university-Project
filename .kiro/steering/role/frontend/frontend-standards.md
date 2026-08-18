@@ -5,6 +5,22 @@ fileMatchPattern: "**/*.{jsx,js,css,scss}"
 
 # Frontend Development Standards — UTMS (React + JavaScript)
 
+## CRITICAL RULE — NO TYPESCRIPT
+
+**TypeScript is NOT allowed in this project. This is non-negotiable.**
+
+- All frontend files MUST use `.jsx` and `.js` extensions
+- NEVER create `.tsx` or `.ts` files
+- NEVER add `typescript`, `@types/*` packages to dependencies
+- NEVER generate TypeScript interfaces, type annotations, or generics
+- Use PropTypes for prop validation
+- Use Zod for runtime validation (not compile-time types)
+- Use JSDoc comments for documentation where needed
+- Design documents must use plain JavaScript examples, not TypeScript
+- If Kiro generates any TypeScript, it must be immediately corrected to JavaScript
+
+This rule applies to: code, design documents, code examples in docs, and any generated output.
+
 ## Project Structure
 ```
 frontend/

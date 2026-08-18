@@ -145,6 +145,20 @@ Every User Story must have these 4 subtasks created at story creation time, rega
 | 3 | Code Review — {Story Title} | Peer review and issue resolution |
 | 4 | Testing — {Story Title} | End-to-end testing and issue resolution |
 
+### Frontend Story Pairing Rule
+
+**For every backend story that exposes REST APIs, a corresponding frontend story must be created as a sibling under the same Epic.**
+
+- Backend story: handles API, service logic, database, validation
+- Frontend story: handles the admin/user UI that consumes those APIs
+- Both are separate stories with their own 4 default subtasks and development subtasks
+- Frontend story is created at the same time as the backend story (not as an afterthought)
+- Frontend story naming convention: `Frontend — {Module Name} ({Brief Description})`
+- Frontend story depends on the backend story (APIs must exist first)
+- This applies to ALL modules: master data, scheduling, approval, reporting, etc.
+
+**Kiro enforcement:** When creating stories from a BRD or design, always create both backend and frontend stories as a pair. Never create a backend-only story without its frontend counterpart.
+
 ### Development Subtasks (Created After Design Approval)
 
 After the design is approved, Kiro creates additional subtasks under the same Story at the same level:
@@ -231,3 +245,15 @@ Kiro must:
       - All tests pass, no issues → **Done**
     - Never leave a ticket in a stale status. If work is done, the ticket must reflect it immediately.
 13. **Parent Story status must reflect progress.** If any subtask under a Story moves out of "To Do" (e.g., to In Progress, Pending Approval, Approved, Done), the parent Story must be transitioned to "In Progress" if it's still in "To Do". A Story should never remain in "To Do" once work has begun on any of its subtasks.
+14. **Pre-push build verification (mandatory).** Before pushing any code to Git:
+    - **Backend:** Run the full Maven build (`mvn clean package`). The build must succeed with zero errors and produce the JAR/WAR package. If the build fails, do NOT push. Fix the issue first.
+    - **Frontend:** Run the Vite build (`pnpm build` or `node node_modules/vite/bin/vite.js build`). The build must succeed with zero errors. If it fails, do NOT push.
+    - **Tests:** All unit tests must pass before pushing. Do not push code with failing tests.
+    - **Kiro enforcement:** Before executing any `git push`, verify the build passes. If it doesn't, refuse the push and report the errors.
+15. **Feature branch per story (mandatory).** All development work happens on a feature branch — never directly on `main`.
+    - **Branch creation:** When a story is assigned and development begins, create a new branch: `feature/{STORY-KEY}-{short-description}` (e.g., `feature/AID-183-academic-calendar`).
+    - **All commits go to the feature branch** during development, unit tests, code review, and testing.
+    - **Merge to main only when:** The entire story is complete (all subtasks Done, Code Review approved, Testing passed).
+    - **Before merging:** Ask the team member for explicit permission: "Story {KEY} is complete. All subtasks done, review approved, tests passed. Ready to merge to main?"
+    - **Only merge after confirmation.** Never push or merge to `main` without explicit user approval.
+    - **Delete the feature branch** after successful merge to main.
